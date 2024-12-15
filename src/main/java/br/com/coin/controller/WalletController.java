@@ -21,5 +21,9 @@ public class WalletController {
         WalletResponseDTO walletResponseDTO = walletService.updateWallet(wallet);
         return ResponseEntity.ok(walletResponseDTO);
     }
+    @GetMapping
+    private ResponseEntity allWallets(){
+        return ResponseEntity.ok(walletService.getAllWallets());
+    }
 
 }

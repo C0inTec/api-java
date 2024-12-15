@@ -4,12 +4,11 @@ import br.com.coin.domain.data_user.UpdateWallet;
 import br.com.coin.domain.data_user.Wallet;
 import br.com.coin.domain.data_user.WalletRepository;
 import br.com.coin.domain.data_user.WalletResponseDTO;
-import br.com.coin.domain.user.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 @Service
 public class WalletService {
@@ -22,7 +21,6 @@ public class WalletService {
         this.walletRepository = walletRepository;
     }
 
-    @Transactional
     public void saveWallet(Long id){
         Wallet wallet = new Wallet(id);
         walletRepository.save(wallet);
@@ -30,11 +28,17 @@ public class WalletService {
 
     @Transactional
     public WalletResponseDTO updateWallet(UpdateWallet updateWallet){
-        Wallet wallet = new Wallet(updateWallet.userId());
+        Wallet wallet = walletRepository.findWalletByUserId(updateWallet.userId());
         if(wallet != null){
             wallet.upWallet(updateWallet);
             walletRepository.save((wallet));
         }
         return new WalletResponseDTO(wallet);
+    }
+
+    @Transactional
+    public List<WalletResponseDTO> getAllWallets(){
+        List<WalletResponseDTO> allWallets = walletRepository.findAll().stream().map(WalletResponseDTO::new).toList();
+        return allWallets;
     }
 }

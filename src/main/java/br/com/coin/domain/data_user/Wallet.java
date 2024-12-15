@@ -4,8 +4,8 @@ package br.com.coin.domain.data_user;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "transactionsDatas")
-@Table(name = "transactionsDatas")
+@Entity(name = "wallets")
+@Table(name = "wallets")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +24,10 @@ public class Wallet {
     private double investimento;
 
     private Long userId;
+
+    public Wallet(){
+
+    }
 
     public Long getId() {
         return id;
