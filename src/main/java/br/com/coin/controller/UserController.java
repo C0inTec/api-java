@@ -1,6 +1,5 @@
 package br.com.coin.controller;
 
-
 import br.com.coin.domain.user.UpdateUser;
 import br.com.coin.domain.user.User;
 import br.com.coin.domain.user.UserRequestDTO;

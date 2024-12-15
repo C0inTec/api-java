@@ -1,6 +1,8 @@
 package br.com.coin.service;
 
 
+import br.com.coin.domain.data_user.Wallet;
+import br.com.coin.domain.data_user.WalletRepository;
 import br.com.coin.domain.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +16,18 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserService( UserRepository userRepository) {
+    @Autowired
+    private  WalletService walletService;
+
+    public UserService( UserRepository userRepository, WalletService walletService) {
         this.userRepository = userRepository;
+        this.walletService = walletService;
     }
     @Transactional
     public User createUser(UserRequestDTO user) {
         User newUser = new User(user);
         userRepository.save(newUser);
+        walletService.saveWallet(newUser.getId());
         return newUser;
     }
 
