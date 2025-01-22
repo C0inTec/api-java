@@ -35,7 +35,6 @@ public class User implements UserDetails {
 
     private Date date_of_birthday;
 
-    @Enumerated(EnumType.STRING)
     private UserRole role;
 
 
@@ -47,17 +46,23 @@ public class User implements UserDetails {
         this.cpf = userRequestDTO.cpf();
         this.phone = userRequestDTO.phone();
         this.date_of_birthday = userRequestDTO.date_of_birthday();
-        this.role = UserRole.valueOf(userRequestDTO.role());
+        this.role = UserRole.fromValue(userRequestDTO.role());
         //this.data = new DataUser(userRequestDTO.data_user());
     }
 
     public User(){
     }
-    public User(String email, String password, UserRole role) {
+    public User(String first_name, String last_name, String email, String password, String cpf,String phone, Date date_of_birthday,String role) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.date_of_birthday = date_of_birthday;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = UserRole.fromValue(role.trim().toLowerCase());
     }
+
     public Long getId() {
         return id;
     }

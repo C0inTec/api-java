@@ -33,15 +33,22 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
-        if(this.userRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
+    public ResponseEntity register(@RequestBody @Valid UserRequestDTO data) {
+        if (this.userRepository.findByEmail(data.email()) != null) {
+            return ResponseEntity.badRequest().build();
+        }
+        // Validar o role antes de criar o usuário
+        try {
+            UserRole.fromValue(data.role());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid role: " + data.role());
+        }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.email(), encryptedPassword, UserRole.valueOf(data.role()));
+        User newUser = new User(data.first_name(),data.last_name(),data.email(), encryptedPassword,data.cpf(),data.phone(),data.date_of_birthday(), data.role());
 
         this.userRepository.save(newUser);
 
         return ResponseEntity.ok().body(newUser);
-
     }
 }

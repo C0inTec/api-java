@@ -1,29 +1,30 @@
 package br.com.coin.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum UserRole {
     ADMIN("admin"),
     USER("user");
 
-    private  String role;
+    private final String role;
 
     UserRole(String role) {
         this.role = role;
     }
-    @JsonValue
+
     public String getRole() {
         return role;
     }
 
-    @JsonCreator
+
     public static UserRole fromValue(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("Role cannot be null or empty");
+        }
         for (UserRole userRole : UserRole.values()) {
-            if (userRole.role.equalsIgnoreCase(value)) {
+            if (userRole.role.equalsIgnoreCase(value.trim())) {
                 return userRole;
             }
         }
-        throw new IllegalArgumentException("Invalid role: " + value);
+        throw new IllegalArgumentException("Invalid role: " + value + ". Allowed values are: admin, user.");
     }
 }
