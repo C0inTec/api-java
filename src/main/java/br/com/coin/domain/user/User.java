@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private String phone;
 
     private Date date_of_birthday;
-
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
 
