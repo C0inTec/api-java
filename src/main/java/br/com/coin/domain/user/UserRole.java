@@ -2,8 +2,8 @@ package br.com.coin.domain.user;
 
 
 public enum UserRole {
-    ADMIN("admin"),
-    USER("user");
+    ADMIN("ADMIN"),
+    USER("USER");
 
     private final String role;
 

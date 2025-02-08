@@ -30,8 +30,17 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/user").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET,"/user").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET,"/user/{id}").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT,"/user").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE,"/user").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/wallet").hasRole("USER")
-                .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.GET,"/wallet").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT,"/wallet").hasRole("USER")
+
+
+                        .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
