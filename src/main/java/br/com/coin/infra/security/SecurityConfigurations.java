@@ -28,6 +28,7 @@ public class SecurityConfigurations {
                 .csrf(csrf ->csrf.disable())
                 .sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST,"/user").hasRole("USER")
@@ -38,8 +39,6 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST,"/wallet").hasRole("USER")
                         .requestMatchers(HttpMethod.GET,"/wallet").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT,"/wallet").hasRole("USER")
-
-
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

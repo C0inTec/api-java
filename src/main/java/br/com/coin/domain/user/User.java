@@ -50,8 +50,6 @@ public class User implements UserDetails {
         //this.data = new DataUser(userRequestDTO.data_user());
     }
 
-    public User(){
-    }
     public User(String first_name, String last_name, String email, String password, String cpf,String phone, Date date_of_birthday,String role) {
         this.first_name = first_name;
         this.last_name = last_name;

@@ -25,9 +25,6 @@ public class Wallet {
 
     private Long userId;
 
-    public Wallet(){
-
-    }
 
     public Long getId() {
         return id;
