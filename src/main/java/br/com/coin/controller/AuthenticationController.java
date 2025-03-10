@@ -2,6 +2,7 @@ package br.com.coin.controller;
 
 import br.com.coin.domain.user.*;
 import br.com.coin.service.TokenService;
+import br.com.coin.service.WalletService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ public class AuthenticationController {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private WalletService walletService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
@@ -48,6 +52,7 @@ public class AuthenticationController {
         User newUser = new User(data.first_name(),data.last_name(),data.email(), encryptedPassword,data.cpf(),data.phone(),data.date_of_birthday(), data.role());
 
         this.userRepository.save(newUser);
+        this.walletService.saveWallet(newUser.getId());
 
         return ResponseEntity.ok().body(newUser);
     }
