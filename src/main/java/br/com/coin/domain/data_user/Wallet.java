@@ -1,6 +1,9 @@
 package br.com.coin.domain.data_user;
 
 
+import br.com.coin.domain.data_user.walletdata.Despesas;
+import br.com.coin.domain.data_user.walletdata.Ganhos;
+import br.com.coin.domain.data_user.walletdata.Investimentos;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,81 +18,27 @@ public class Wallet {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double saldo;
-
-    private double gastos;
-
-    private double salario;
-
-    private double investimento;
-
     private Long userId;
 
+    @Embedded
+    private Despesas valoresSaidas;
 
-    public Long getId() {
-        return id;
-    }
+    @Embedded
+    private Ganhos valoresEntradas;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getGastos() {
-        return gastos;
-    }
-
-    public void setGastos(double gastos) {
-        this.gastos = gastos;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
-    public double getInvestimento() {
-        return investimento;
-    }
-
-    public void setInvestimento(double investimento) {
-        this.investimento = investimento;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    @Embedded
+    private Investimentos investimentos;
 
     public Wallet(Long id){
         this.userId = id;
+        this.valoresSaidas = new Despesas();
+        this.valoresEntradas = new Ganhos();
+        this.investimentos = new Investimentos();
     }
 
     public void upWallet(UpdateWallet updateWallet) {
-        if(updateWallet.saldo() != this.saldo){
-            this.saldo = updateWallet.saldo();
+        this.investimentos.atualizaInvestimento(updateWallet.investimento());
+        this.valoresEntradas.atualizaGanhos(updateWallet.ganhos());
+        this.valoresSaidas.atualizaDespesas(updateWallet.despesas());
         }
-        if(updateWallet.gastos() != this.gastos){
-            this.gastos = updateWallet.gastos();
-        }
-        if(updateWallet.salario() != this.salario){
-            this.salario = updateWallet.salario();
-        }
-        if(updateWallet.investimentos() != this.investimento){
-            this.investimento = updateWallet.investimentos();
-        }
-    }
 }

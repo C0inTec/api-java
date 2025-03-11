@@ -1,4 +1,8 @@
 package br.com.coin.domain.data_user;
 
-public record UpdateWallet( double saldo, double gastos, double salario, double investimentos, Long userId) {
+import br.com.coin.domain.data_user.walletdata.DataDespesas;
+import br.com.coin.domain.data_user.walletdata.DataGanhos;
+import br.com.coin.domain.data_user.walletdata.DataInvestimento;
+
+public record UpdateWallet(Long userId, DataDespesas despesas, DataInvestimento investimento, DataGanhos ganhos) {
 }
