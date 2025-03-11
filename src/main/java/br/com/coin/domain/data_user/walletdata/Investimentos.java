@@ -19,8 +19,8 @@ public class Investimentos {
 
 
     public Investimentos(DataInvestimento data){
-        this.acoes = data.açoes();
-        this.criptomoedas = data.cripto();
+        this.acoes = data.acoes();
+        this.criptomoedas = data.criptomoedas();
         this.imoveis = data.imoveis();
         this.fundos = data.fundos();
         this.rendaFixa = data.rendafixa();
@@ -28,11 +28,11 @@ public class Investimentos {
     }
 
     public void atualizaInvestimento(DataInvestimento updateData){
-        if(this.acoes != updateData.açoes()){
-            this.acoes = updateData.açoes();
+        if(this.acoes != updateData.acoes()){
+            this.acoes = updateData.acoes();
         }
-        if(this.criptomoedas != updateData.cripto()){
-            this.criptomoedas = updateData.cripto();
+        if(this.criptomoedas != updateData.criptomoedas()){
+            this.criptomoedas = updateData.criptomoedas();
         }
         if(this.imoveis != updateData.imoveis()){
             this.imoveis = updateData.imoveis();
