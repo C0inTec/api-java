@@ -25,5 +25,10 @@ public class WalletController {
     private ResponseEntity allWallets(){
         return ResponseEntity.ok(walletService.getAllWallets());
     }
+    @GetMapping("/{userId}")
+    private ResponseEntity getWallet(@PathVariable Long userId){
+        return ResponseEntity.ok(walletService.getWallet(userId));
+
+    }
 
 }

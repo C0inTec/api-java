@@ -1,9 +1,7 @@
 package br.com.coin.domain.data_user;
 
 
-import br.com.coin.domain.data_user.walletdata.Despesas;
-import br.com.coin.domain.data_user.walletdata.Ganhos;
-import br.com.coin.domain.data_user.walletdata.Investimentos;
+import br.com.coin.domain.data_user.walletdata.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,8 +35,20 @@ public class Wallet {
     }
 
     public void upWallet(UpdateWallet updateWallet) {
-        this.investimentos.atualizaInvestimento(updateWallet.investimento());
-        this.valoresEntradas.atualizaGanhos(updateWallet.ganhos());
-        this.valoresSaidas.atualizaDespesas(updateWallet.despesas());
+        if (updateWallet.investimento() != null) {
+            this.investimentos.atualizaInvestimento(updateWallet.investimento());
+        } else {
+            this.investimentos.atualizaInvestimento(new DataInvestimento(0, 0, 0, 0, 0, 0));
         }
+        if (updateWallet.despesas() != null) {
+            this.valoresSaidas.atualizaDespesas(updateWallet.despesas());
+        } else {
+            this.valoresSaidas.atualizaDespesas(new DataDespesas(0, 0, 0, 0, 0, 0, 0));
+        }
+        if (updateWallet.ganhos() != null) {
+            this.valoresEntradas.atualizaGanhos(updateWallet.ganhos());
+        } else {
+            this.valoresEntradas.atualizaGanhos(new DataGanhos(0, 0, 0, 0, 0, 0));
+        }
+    }
 }

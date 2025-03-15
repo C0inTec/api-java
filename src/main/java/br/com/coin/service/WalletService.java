@@ -41,4 +41,10 @@ public class WalletService {
         List<WalletResponseDTO> allWallets = walletRepository.findAll().stream().map(WalletResponseDTO::new).toList();
         return allWallets;
     }
+
+    @Transactional
+    public WalletResponseDTO getWallet(Long id){
+        Wallet wallet = walletRepository.findWalletByUserId(id);
+        return new WalletResponseDTO(wallet);
+    }
 }
