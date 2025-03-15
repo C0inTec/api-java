@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((User) auth.getPrincipal()); //vai pegar o usuário baseado no auth e o principal faz isso
-
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        User user  = (User) userRepository.findByEmail(data.email());
+        return ResponseEntity.ok(new LoginResponseDTO(token, user.getId()));
     }
 
     @PostMapping("/register")
