@@ -27,7 +27,7 @@ public class Despesas {
         this.transporte = data.transporte();
         this.educacao = data.educacao();
         this.saude = data.saude();
-        this.lazer = data.saude();
+        this.lazer = data.lazer();
     }
 
     public void atualizaDespesas(DataDespesas updateDespesas){
