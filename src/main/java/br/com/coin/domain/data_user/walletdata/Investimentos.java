@@ -28,24 +28,12 @@ public class Investimentos {
     }
 
     public void atualizaInvestimento(DataInvestimento updateData){
-        if(this.acoes != updateData.acoes()){
-            this.acoes = updateData.acoes();
-        }
-        if(this.criptomoedas != updateData.criptomoedas()){
-            this.criptomoedas = updateData.criptomoedas();
-        }
-        if(this.imoveis != updateData.imoveis()){
-            this.imoveis = updateData.imoveis();
-        }
-        if(this.fundos != updateData.fundos()){
-            this.fundos = updateData.fundos();
-        }
-        if(this.rendaFixa != updateData.rendafixa()){
-            this.rendaFixa = updateData.rendafixa();
-        }
-        if(this.negocios != updateData.negocios()){
-            this.negocios = updateData.negocios();
-        }
+        this.acoes = (this.acoes != updateData.acoes() && updateData.acoes() != 0) ? updateData.acoes() : this.acoes;
+        this.criptomoedas = (this.criptomoedas != updateData.criptomoedas() && updateData.criptomoedas() != 0) ? updateData.criptomoedas() : this.criptomoedas;
+        this.imoveis = (this.imoveis != updateData.imoveis() && updateData.imoveis() != 0) ? updateData.imoveis() : this.imoveis;
+        this.fundos = (this.fundos != updateData.fundos() && updateData.fundos() != 0) ? updateData.fundos() : this.fundos;
+        this.rendaFixa = (this.rendaFixa != updateData.rendafixa() && updateData.rendafixa() != 0) ? updateData.rendafixa() : this.rendaFixa;
+        this.negocios = (this.negocios != updateData.negocios() && updateData.negocios() != 0) ? updateData.negocios() : this.negocios;
 
     }
 }

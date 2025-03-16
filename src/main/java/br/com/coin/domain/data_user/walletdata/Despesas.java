@@ -30,28 +30,14 @@ public class Despesas {
         this.lazer = data.lazer();
     }
 
-    public void atualizaDespesas(DataDespesas updateDespesas){
-        if(this.aluguel != updateDespesas.aluguel()){
-            this.aluguel = updateDespesas.aluguel();
-        }
-        if(this.contas != updateDespesas.contas()){
-            this.contas = updateDespesas.contas();
-        }
-        if(this.alimentacao != updateDespesas.alimentacao()){
-            this.alimentacao = updateDespesas.alimentacao();
-        }
-        if(this.transporte!= updateDespesas.transporte()){
-            this.transporte = updateDespesas.transporte();
-        }
-        if(this.educacao != updateDespesas.educacao()){
-            this.educacao = updateDespesas.educacao();
-        }
-        if(this.saude != updateDespesas.saude()){
-            this.saude = updateDespesas.saude();
-        }
-        if(this.lazer != updateDespesas.lazer()){
-            this.lazer = updateDespesas.lazer();
-        }
+    public void atualizaDespesas(DataDespesas updateData){
+        this.aluguel = (this.aluguel != updateData.aluguel() && updateData.aluguel() != 0) ? updateData.aluguel() : this.aluguel;
+        this.contas = (this.contas != updateData.contas() && updateData.contas() != 0) ? updateData.contas() : this.contas;
+        this.alimentacao = (this.alimentacao != updateData.alimentacao() && updateData.alimentacao() != 0) ? updateData.alimentacao() : this.alimentacao;
+        this.transporte = (this.transporte != updateData.transporte() && updateData.transporte() != 0) ? updateData.transporte() : this.transporte;
+        this.educacao = (this.educacao != updateData.educacao() && updateData.educacao() != 0) ? updateData.educacao() : this.educacao;
+        this.saude = (this.saude != updateData.saude() && updateData.saude() != 0) ? updateData.saude() : this.saude;
+        this.lazer = (this.lazer != updateData.lazer() && updateData.lazer() != 0) ? updateData.lazer() : this.lazer;
     }
 
 }
