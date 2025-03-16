@@ -4,6 +4,7 @@ package br.com.coin.service;
 import br.com.coin.domain.data_user.Wallet;
 import br.com.coin.domain.data_user.WalletRepository;
 import br.com.coin.domain.user.*;
+import br.com.coin.exception.UserNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +39,8 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO getUserById(Long id) {
-        User user = userRepository.findById(id).orElse(null);
+    public UserResponseDTO getUserById(Long id)  {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("User Not Found"));
         return new UserResponseDTO(user);
     }
 
